@@ -17,7 +17,8 @@ echo_indented "SOURCE_VERSION: $SOURCE_VERSION"
 mkdir -p $1/$output_dir
 cat << EOF > $1/$output_path
 export SOURCE_VERSION=\${SOURCE_VERSION:-$SOURCE_VERSION}
-echo $SOURCE_VERSION > public/.rev
+echo $SOURCE_VERSION > /app/public/.rev
 EOF
 
-echo_indented "Script installed to $output_path"
+echo_indented "SOURCE_VERSION will be available as an env var via $output_path"
+echo_indented "SOURCE_VERSION written to /app/public/.rev"

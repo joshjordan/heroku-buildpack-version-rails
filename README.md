@@ -17,7 +17,7 @@ So, let's capture the information during slug compilation. Heroku provides the [
 
 First thing, add the buildpack to your app:
 
-	$ heroku buildpacks:add https://github.com/ianpurvis/heroku-buildpack-version
+	$ heroku buildpacks:add https://github.com/joshjordan/heroku-buildpack-version-rails
 
 During your next deployment, the buildpack will generate the environment configuration script:
 
@@ -27,7 +27,7 @@ During your next deployment, the buildpack will generate the environment configu
 	       SOURCE_VERSION: d9f63da90bc76ee878a0e9a54d9e85db7da4a52b
 	       Script installed to .profile.d/source_version.sh
 
-The script itself is simple, just a single export statement with default expansion: 
+The script itself is simple, just a single export statement with default expansion:
 
 	export SOURCE_VERSION=${SOURCE_VERSION:-f5efc0615dbd0f64f718e142bad858b8e1cf59bb}
 
@@ -36,16 +36,3 @@ Note the expansion syntax ':-' ensures that any existing value is not overidden.
 In dev environments, scripting `git rev-parse` is still probably the most convenient way to get your current source version. For easy portablity, you can cascade the initialization:
 
 	version = ENV['SOURCE_VERSION'] || `git rev-parse HEAD`.presence || '1.0'
-
-## Links
-
-- [Heroku Buildpacks](http://devcenter.heroku.com/articles/buildpacks)
-- [Buildpack API](https://devcenter.heroku.com/articles/buildpack-api)
-- [SOURCE_VERSION](https://devcenter.heroku.com/changelog-items/630)
-- [Default Config Values](https://devcenter.heroku.com/articles/buildpack-api#default-config-values)
-
-
-## License
-The pack is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-[![https://purvisresearch.com](logo.svg)](https://purvisresearch.com)
